@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "58665914485",
+    "project_id": "movieapps-464b5",
+    "storage_bucket": "movieapps-464b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58665914485:android:d0b2709026b1fb0eb7a83c",
+        "android_client_info": {
+          "package_name": "com.example.mononton_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58665914485-6ce1k19mnj2078jodhk72agrmds3vp6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc4ZHEGMRM_QoU6zRBP3KRqifn-3TC8ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58665914485-6ce1k19mnj2078jodhk72agrmds3vp6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
