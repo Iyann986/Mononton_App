@@ -18,7 +18,7 @@ class MovieDetail {
 
   late MovieImage movieImage;
 
-  late List<Cast> castList;
+  late List<Cast>? castList;
 
   MovieDetail(
       {this.id,

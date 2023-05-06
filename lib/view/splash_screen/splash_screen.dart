@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mononton_app/themes/constant/theme_color.dart';
+import 'package:mononton_app/view/access/user_email.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,8 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed("/onboarding");
+    Timer(const Duration(seconds: 3), () async {
+      final user = UserEmail.getUserEmail();
+
+      if (user == null) {
+        Navigator.of(context).pushReplacementNamed("/onboarding");
+      } else {
+        Navigator.of(context).pushReplacementNamed("/movie_screen");
+      }
+      // Navigator.of(context).pushReplacementNamed("/onboarding");
     });
   }
 

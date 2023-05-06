@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mononton_app/themes/themes.dart';
-import 'package:mononton_app/view/streams/login_screen.dart';
+import 'package:mononton_app/view/access/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mononton_app/themes/constant/theme_color.dart';
 

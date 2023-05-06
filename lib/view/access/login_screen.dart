@@ -1,76 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mononton_app/view/movie/movie_screen.dart';
-import 'package:mononton_app/view/streams/login_screen.dart';
+import 'package:mononton_app/view/access/register_screen.dart';
+import 'package:mononton_app/view/access/reset_password.dart';
 
-import '../../models/users/users.dart';
-
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+  static const String route = "/login";
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
+  // form key
+  final _formKey = GlobalKey<FormState>();
+
+  // text editing controller
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   // firebase
   final _auth = FirebaseAuth.instance;
 
   // string for displaying the error Message
   String? errorMessage;
 
-  bool? remeber = false;
-
-  // our form key
-  final _formKey = GlobalKey<FormState>();
-
-  // editing Controller
-  final emailEditingController = TextEditingController();
-  final passwordEditingController = TextEditingController();
-  final confirmPasswordEditingController = TextEditingController();
-  final nameEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    // full name field
-    final fullNameField = TextFormField(
-      autofocus: false,
-      controller: nameEditingController,
-      keyboardType: TextInputType.name,
-      validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
-        if (value!.isEmpty) {
-          return ("Full Name cannot be Empty");
-        }
-        if (!regex.hasMatch(value)) {
-          return ("Enter Valid name(Min. 3 Character)");
-        }
-        return null;
-      },
-      onSaved: (value) {
-        nameEditingController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Enter Your Name",
-        labelText: "Full Name",
-        filled: true,
-        fillColor: Color(0xffD7D9DD),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
-    );
-
     // email field
     final emailField = TextFormField(
       autofocus: false,
-      controller: emailEditingController,
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value!.isEmpty) {
@@ -83,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return null;
       },
       onSaved: (value) {
-        emailEditingController.text = value!;
+        emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -101,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // password field
     final passwordField = TextFormField(
       autofocus: false,
-      controller: passwordEditingController,
+      controller: passwordController,
       obscureText: true,
       validator: (value) {
         RegExp regex = new RegExp(r'^.{6,}$');
@@ -113,42 +77,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
       },
       onSaved: (value) {
-        passwordEditingController.text = value!;
+        passwordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Password",
         labelText: "Password",
-        filled: true,
-        fillColor: Color(0xffD7D9DD),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
-    );
-
-    //confirm password field
-    final confirmPasswordField = TextFormField(
-      autofocus: false,
-      controller: confirmPasswordEditingController,
-      style: TextStyle(color: Colors.white.withOpacity(0.9)),
-      obscureText: true,
-      validator: (value) {
-        if (confirmPasswordEditingController.text !=
-            passwordEditingController.text) {
-          return "Password don't match";
-        }
-        return null;
-      },
-      onSaved: (value) {
-        confirmPasswordEditingController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Confirm password",
-        labelText: "Confirm password",
         filled: true,
         fillColor: Color(0xffD7D9DD),
         border: OutlineInputBorder(
@@ -165,10 +100,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            signUp(emailEditingController.text, passwordEditingController.text);
+            signIn(emailController.text, passwordController.text);
           },
           child: Text(
-            "Register",
+            "Login",
             textAlign: TextAlign.center,
             style: GoogleFonts.lexend(
               fontSize: 16,
@@ -196,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+            padding: EdgeInsets.all(36),
             child: Form(
               key: _formKey,
               child: Column(
@@ -204,61 +139,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: 230,
+                    height: 200,
                     child: Image.asset(
-                      "assets/images/ic_register.png",
+                      "assets/images/ic_login.png",
                       fit: BoxFit.contain,
                     ),
                   ),
-                  // const SizedBox(height: 5),
+                  const SizedBox(height: 15),
                   Text(
-                    "Let’s start with register!",
+                    "Let’s sign you in!",
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xff464555),
                     ),
                   ),
-                  SizedBox(height: 15),
-                  fullNameField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   emailField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   passwordField,
-                  SizedBox(height: 15),
-                  confirmPasswordField,
-                  SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Checkbox(
-                          value: remeber,
-                          onChanged: (value) {
-                            setState(() {
-                              remeber = value;
-                            });
-                          }),
-                      Text(
-                        "I agree with ",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xff464555),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        "terms and conditions",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xff464555),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  // const SizedBox(height: 15),
+                  forgetPassword(context),
+                  const SizedBox(height: 5),
+                  Center(
                     child: Row(
                       children: [
                         Container(
@@ -276,7 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Container(
                           height: 2,
-                          width: MediaQuery.of(context).size.height * 0.15,
+                          width: MediaQuery.of(context).size.height * 0.10,
                           color: Colors.grey,
                         )
                       ],
@@ -354,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Already have an account? ",
+                        "Create an account? ",
                         style: GoogleFonts.poppins(
                           color: Color(0xff646472),
                         ),
@@ -365,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             PageRouteBuilder(
                               pageBuilder:
                                   (context, animation, secondaryAnimation) {
-                                return const LoginScreen();
+                                return const RegisterScreen();
                               },
                               transitionsBuilder: (context, animation,
                                   secondaryAnimation, child) {
@@ -381,7 +284,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         },
                         child: Text(
-                          "Login",
+                          "Register",
                           style: GoogleFonts.poppins(
                             color: Color(0xffC1232F),
                             fontWeight: FontWeight.bold,
@@ -400,19 +303,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void signUp(String email, String password) async {
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+          child: Text(
+            "Forgot Password?",
+            style: GoogleFonts.poppins(
+              color: Color(0xffC1232F),
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          onPressed: () => Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return const ResetPasswordScreen();
+                  },
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    final tween =
+                        Tween(begin: const Offset(0, 5), end: Offset.zero);
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                ),
+              )),
+    );
+  }
+
+  // login function
+  void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore()})
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e!.message);
-        });
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => MovieScreen())),
+                });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":
             errorMessage = "Your email address appears to be malformed.";
+
             break;
           case "wrong-password":
             errorMessage = "Your password is wrong.";
@@ -436,36 +376,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
         print(error.code);
       }
     }
-  }
-
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-
-    Users userModel = Users();
-
-    // writing all the values
-    userModel.email = user!.email;
-    userModel.name = nameEditingController.text;
-    userModel.password = passwordEditingController.text;
-    userModel.id = user.uid;
-    userModel.movieWatch = [];
-    userModel.movieDropped = [];
-    userModel.movieFinish = [];
-
-    await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
-
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => MovieScreen()),
-        (route) => false);
   }
 }
