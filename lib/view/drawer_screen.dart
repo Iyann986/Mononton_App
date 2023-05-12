@@ -2,6 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mononton_app/models/users/users.dart';
 import 'package:flutter/material.dart';
 import 'package:mononton_app/view/access/login_screen.dart';
+import 'package:mononton_app/view/users/profile_screen.dart';
+import 'package:mononton_app/view/watchlist/watchlist_screen.dart';
+
+import 'movie/movie_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   final Users user;
@@ -13,45 +17,57 @@ class DrawerScreen extends StatelessWidget {
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              // color: Color.fromARGB(214, 5, 22, 21),
+            decoration: const BoxDecoration(
               color: Color(0xff233162),
             ),
-            // accountName: Text(user.name!),
-            accountName: Text("User"),
+            accountName: Text(user.name!),
             currentAccountPicture: const CircleAvatar(
               backgroundImage: AssetImage(
                 'assets/images/ic_avatar.png',
               ),
             ),
-            // accountEmail: Text(user.email!),
-            accountEmail: Text("Email"),
+            accountEmail: Text(user.email!),
           ),
           DrawerListTile(
             iconData: Icons.person_rounded,
-            iconColor: Color(0xff464646),
+            iconColor: const Color(0xff464646),
             title: 'Profile',
-            titleColor: Color(0xff464646),
+            titleColor: const Color(0xff464646),
             onTilePressed: () {
-              // Navigator ke profile screen
+              Navigator.pushAndRemoveUntil(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => ProfileScreen(
+                            user: user,
+                          )),
+                  (route) => false);
             },
           ),
           DrawerListTile(
             iconData: Icons.movie_rounded,
-            iconColor: Color(0xff464646),
+            iconColor: const Color(0xff464646),
             title: 'Movie',
-            titleColor: Color(0xff464646),
+            titleColor: const Color(0xff464646),
             onTilePressed: () {
-              // Navigator ke Movie Screen
+              Navigator.pushAndRemoveUntil(
+                  (context),
+                  MaterialPageRoute(builder: (context) => MovieScreen()),
+                  (route) => false);
             },
           ),
           DrawerListTile(
             iconData: Icons.tv_rounded,
-            iconColor: Color(0xff464646),
+            iconColor: const Color(0xff464646),
             title: 'Watchlist',
-            titleColor: Color(0xff464646),
+            titleColor: const Color(0xff464646),
             onTilePressed: () {
-              // Navigator ke Watchlist Screen
+              Navigator.pushAndRemoveUntil(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => WatchlistScreen(
+                            user: user,
+                          )),
+                  (route) => false);
             },
           ),
           const Divider(
@@ -59,9 +75,9 @@ class DrawerScreen extends StatelessWidget {
           ),
           DrawerListTile(
             iconData: Icons.logout_rounded,
-            iconColor: Color(0xffC1232F),
+            iconColor: const Color(0xffC1232F),
             title: 'Log Out',
-            titleColor: Color(0xffC1232F),
+            titleColor: const Color(0xffC1232F),
             onTilePressed: () {
               FirebaseAuth.instance.signOut().then((value) {
                 Navigator.pushAndRemoveUntil(

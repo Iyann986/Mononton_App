@@ -185,22 +185,22 @@ class _CategoryMovieState extends State<CategoryMovie> {
                               Container(
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: Colors.yellow,
                                       size: 14,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: Colors.yellow,
                                       size: 14,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: Colors.yellow,
                                       size: 14,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: Colors.yellow,
                                       size: 14,
@@ -211,7 +211,8 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                       size: 14,
                                     ),
                                     Text(
-                                      movie.voteAverage!,
+                                      movie.voteAverage!.toString().toString(),
+                                      // movie.voteAverage!.toString(),
                                       style: TextStyle(
                                         color: Colors.black45,
                                       ),

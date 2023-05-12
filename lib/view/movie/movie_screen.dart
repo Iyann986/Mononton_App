@@ -10,6 +10,7 @@ import 'package:mononton_app/view/movie/movie_category.dart';
 import 'package:mononton_app/view/movie/movie_detail.dart';
 import 'package:mononton_app/view/movie/movie_view_model.dart';
 import 'package:mononton_app/view/movie/person_view_model.dart';
+import 'package:mononton_app/view/search/search.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/movie_model.dart';
@@ -54,14 +55,23 @@ class _MovieScreenState extends State<MovieScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(user: loggedInUser),
+                ),
+              );
+            },
             icon: const Icon(Icons.search),
           ),
         ],
       ),
       drawer: loggedInUser == null
           ? const CircularProgressIndicator()
-          : DrawerScreen(user: loggedInUser),
+          : DrawerScreen(
+              user: loggedInUser,
+            ),
       body: movieProvider.movies.isEmpty
           ? const CircularProgressIndicator()
           : LayoutBuilder(
@@ -80,13 +90,6 @@ class _MovieScreenState extends State<MovieScreen> {
                             Movie movie = movieProvider.movies[index];
                             return GestureDetector(
                               onTap: () {
-                                //detail movie
-                                // final int id = movieProvider.movies[index].id!;
-                                // Navigator.pushNamed(
-                                //   context,
-                                //   '/movie_detail',
-                                //   arguments: id,
-                                // );
                                 Navigator.of(context).push(
                                   PageRouteBuilder(
                                     pageBuilder: (context, animation,

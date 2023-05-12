@@ -11,7 +11,7 @@ class MovieViewModel with ChangeNotifier {
       final c = await AuthApi.getNowPlayingMovie();
       _movies = c;
     } else {
-      final c = await AuthApi.getPopularMovie();
+      final c = await AuthApi.getMovieByGenre(id);
       _movies = c;
     }
     notifyListeners();

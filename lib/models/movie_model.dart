@@ -10,7 +10,7 @@ class Movie {
   final String? title;
   final bool? video;
   final int? voteCount;
-  final String? voteAverage;
+  final double? voteAverage;
 
   late String error;
 
@@ -35,12 +35,12 @@ class Movie {
         originalLanguage: json['original_language'],
         originalTitle: json['original_title'],
         overview: json['overview'],
-        popularity: json['popularity'],
+        popularity: json['popularity']?.toDouble(),
         posterPath: json['poster_path'],
         releaseDate: json['release_date'],
         title: json['title'],
         video: json['video'],
         voteCount: json['vote_count'],
-        voteAverage: json['vote_average'].toString());
+        voteAverage: json['vote_average']?.toDouble());
   }
 }

@@ -23,7 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         Navigator.of(context).pushReplacementNamed("/movie_screen");
       }
-      // Navigator.of(context).pushReplacementNamed("/onboarding");
     });
   }
 
@@ -64,12 +63,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // CircularProgressIndicator(
-              //   color: Color(0xffE21221),
-              // ),
             ],
           ),
         ),

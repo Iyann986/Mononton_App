@@ -6,8 +6,12 @@ import 'package:mononton_app/view/movie/movie_screen.dart';
 import 'package:mononton_app/view/movie/movie_view_model.dart';
 import 'package:mononton_app/view/movie/person_view_model.dart';
 import 'package:mononton_app/view/onboarding/onboarding_screen.dart';
+import 'package:mononton_app/view/search/search_view_model.dart';
 import 'package:mononton_app/view/splash_screen/splash_screen.dart';
 import 'package:mononton_app/view/access/login_screen.dart';
+import 'package:mononton_app/view/watchlist/dropped_view_model.dart';
+import 'package:mononton_app/view/watchlist/finish_view_model.dart';
+import 'package:mononton_app/view/watchlist/watchlist_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -27,6 +31,18 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => PersonViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SearchViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WatchlistViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DroppedViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FinishViewModel(),
         ),
       ],
       child: const MyApp(),
