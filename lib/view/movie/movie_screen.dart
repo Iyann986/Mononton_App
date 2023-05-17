@@ -51,7 +51,7 @@ class _MovieScreenState extends State<MovieScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xffC1232F),
-        title: const Text("Movie Screen"),
+        title: const Text('Movie Screen'),
         centerTitle: true,
         actions: [
           IconButton(
