@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       controller: nameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
+        RegExp regex = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
           return ("Full Name cannot be Empty");
         }
@@ -56,11 +56,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Name",
         labelText: "Full Name",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -87,11 +87,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Email",
         labelText: "Email",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -104,24 +104,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
       controller: passwordEditingController,
       obscureText: true,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{6,}$');
+        RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
           return ("Password is required for login");
         }
         if (!regex.hasMatch(value)) {
           return ("Enter Valid Password(Min. 6 Character)");
         }
+        return null;
       },
       onSaved: (value) {
         passwordEditingController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Password",
         labelText: "Password",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -146,11 +147,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm password",
         labelText: "Confirm password",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -196,7 +197,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
             child: Form(
               key: _formKey,
               child: Column(
@@ -219,15 +221,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: const Color(0xff464555),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   fullNameField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   emailField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   passwordField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   confirmPasswordField,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                     children: [
                       Checkbox(
@@ -240,7 +242,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         "I agree with ",
                         style: GoogleFonts.poppins(
-                          color: Color(0xff464555),
+                          color: const Color(0xff464555),
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),
@@ -248,7 +250,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         "terms and conditions",
                         style: GoogleFonts.poppins(
-                          color: Color(0xff464555),
+                          color: const Color(0xff464555),
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                           decoration: TextDecoration.underline,
@@ -356,7 +358,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         "Already have an account? ",
                         style: GoogleFonts.poppins(
-                          color: Color(0xff646472),
+                          color: const Color(0xff646472),
                         ),
                       ),
                       GestureDetector(
@@ -383,7 +385,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Text(
                           "Login",
                           style: GoogleFonts.poppins(
-                            color: Color(0xffC1232F),
+                            color: const Color(0xffC1232F),
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
@@ -406,6 +408,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) => {postDetailsToFirestore()})
+            // ignore: body_might_complete_normally_catch_error
             .catchError((e) {
           Fluttertoast.showToast(msg: e!.message);
         });
@@ -433,6 +436,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             errorMessage = "An undefined Error happened.";
         }
         Fluttertoast.showToast(msg: errorMessage!);
+        // ignore: avoid_print
         print(error.code);
       }
     }
@@ -465,7 +469,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => MovieScreen()),
+        MaterialPageRoute(builder: (context) => const MovieScreen()),
         (route) => false);
   }
 }

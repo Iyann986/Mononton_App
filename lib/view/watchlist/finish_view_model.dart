@@ -12,7 +12,7 @@ class FinishViewModel with ChangeNotifier {
   FinishViewState _state = FinishViewState.none;
   FinishViewState get state => _state;
 
-  List<MovieDetail> _finish = [];
+  final List<MovieDetail> _finish = [];
   List<MovieDetail> get finish => _finish;
 
   changeState(FinishViewState s) {

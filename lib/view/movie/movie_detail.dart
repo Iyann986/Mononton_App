@@ -154,7 +154,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: Color(0xffC1232F),
+                                          color: const Color(0xffC1232F),
                                           fontSize: 12),
                                 ),
                               ]),
@@ -176,7 +176,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: Color(0xffC1232F),
+                                          color: const Color(0xffC1232F),
                                           fontSize: 12),
                                 ),
                               ]),
@@ -198,7 +198,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: Color(0xffC1232F),
+                                          color: const Color(0xffC1232F),
                                           fontSize: 12),
                                 ),
                               ]),
@@ -228,13 +228,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                      child: Container(
+                      child: SizedBox(
                         height: 120,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             Cast cast = viewModel.movieDetail!.castList![index];
-                            return Container(
+                            return SizedBox(
                               child: Column(
                                 children: [
                                   Card(
@@ -260,7 +260,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                   height: 80,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.all(
+                                                          const BorderRadius
+                                                                  .all(
                                                               Radius.circular(
                                                                   100)),
                                                       image: DecorationImage(
@@ -270,7 +271,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                 );
                                               },
                                               placeholder: (context, url) =>
-                                                  Container(
+                                                  const SizedBox(
                                                 width: 80,
                                                 height: 80,
                                                 child: Center(
@@ -281,7 +282,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                             ),
                                           ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     child: Center(
                                       child: Text(
                                         cast.name!.toUpperCase(),
@@ -293,7 +294,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       ),
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     child: Text(
                                       cast.character!.toUpperCase(),
                                       style: const TextStyle(
@@ -321,20 +322,20 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               widget.user.movieWatch!)
                           ? Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Container(
+                              child: SizedBox(
                                 height: 50,
                                 width: 200,
                                 child: ElevatedButton(
                                   onPressed: () {},
-                                  child: Text(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      const Color(0xffC1232F),
+                                    ),
+                                  ),
+                                  child: const Text(
                                     'Added To Watch List',
                                     style: TextStyle(
                                       color: Colors.white,
-                                    ),
-                                  ),
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Color(0xffC1232F),
                                     ),
                                   ),
                                 ),
@@ -344,15 +345,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   widget.user.movieDropped!)
                               ? ElevatedButton(
                                   onPressed: () {},
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      const Color(0xffC1232F),
+                                    ),
+                                  ),
                                   child: const Text(
                                     'This movie is dropped',
                                     style: TextStyle(
                                       color: Colors.white,
-                                    ),
-                                  ),
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Color(0xffC1232F),
                                     ),
                                   ),
                                 )
@@ -360,16 +361,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       widget.user.movieFinish!)
                                   ? ElevatedButton(
                                       onPressed: () {},
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          const Color(0xffC1232F),
+                                        ),
+                                      ),
                                       child: const Text(
                                         'You finish watching this movie',
                                         style: TextStyle(
                                           color: Colors.white,
-                                        ),
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Color(0xffC1232F),
                                         ),
                                       ),
                                     )
@@ -390,19 +391,19 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                             (context),
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    MovieScreen()),
+                                                    const MovieScreen()),
                                             (route) => false);
                                       },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          const Color(0xffC1232F),
+                                        ),
+                                      ),
                                       child: const Text(
                                         'Add to Watchlist',
                                         style: TextStyle(
                                           color: Colors.white,
-                                        ),
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Color(0xffC1232F),
                                         ),
                                       ),
                                     ),
@@ -426,17 +427,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           )
         : ClipPath(
             child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
               child: CachedNetworkImage(
                 imageUrl:
                     'https://image.tmdb.org/t/p/original/${viewModel.movieDetail!.backdropPath}',
                 height: MediaQuery.of(context).size.height / 3,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => CircularProgressIndicator(),
-              ),
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
               ),
             ),
           );
@@ -480,7 +482,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   Widget _listImages(DetailViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-      child: Container(
+      child: SizedBox(
         height: 130,
         child: viewModel.movieDetail!.backdropPath == null
             ? const Image(
@@ -511,10 +513,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   )),
                             );
                           },
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => const SizedBox(
                             width: 100,
                             height: 100,
-                            child: const Center(
+                            child: Center(
                               child: CircularProgressIndicator(),
                             ),
                           ),
@@ -534,6 +536,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     );
   }
 
+  // ignore: unused_element
   Widget _buttonWatchList(DetailViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -552,11 +555,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             docUser.update({"movieWatch": FieldValue.arrayUnion(movie)});
             Navigator.pushAndRemoveUntil(
                 (context),
-                MaterialPageRoute(builder: (context) => MovieScreen()),
+                MaterialPageRoute(builder: (context) => const MovieScreen()),
                 (route) => false);
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Color(0xffC1232F)),
+            backgroundColor: MaterialStateProperty.all(const Color(0xffC1232F)),
           ),
           child: const Text(
             'Add to Watchlist',

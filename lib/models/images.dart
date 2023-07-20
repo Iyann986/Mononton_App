@@ -9,7 +9,7 @@ class Images extends Equatable {
   final double? voteAverage;
   final int? voteCount;
 
-  Images(
+  const Images(
       {this.aspect,
       this.imagePath,
       this.height,

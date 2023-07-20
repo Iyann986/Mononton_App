@@ -26,6 +26,7 @@ class SearchViewModel with ChangeNotifier {
     try {
       final c = await AuthApi.searchMovie(query);
       _movies = c;
+      // ignore: avoid_print
       print('data = ${_movies.length}');
       notifyListeners();
       changeState(SearchViewState.none);

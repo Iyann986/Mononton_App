@@ -9,7 +9,7 @@ import 'movie/movie_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   final Users user;
-  DrawerScreen({Key? key, required this.user}) : super(key: key);
+  const DrawerScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class DrawerScreen extends StatelessWidget {
             onTilePressed: () {
               Navigator.pushAndRemoveUntil(
                   (context),
-                  MaterialPageRoute(builder: (context) => MovieScreen()),
+                  MaterialPageRoute(builder: (context) => const MovieScreen()),
                   (route) => false);
             },
           ),
@@ -82,7 +82,8 @@ class DrawerScreen extends StatelessWidget {
               FirebaseAuth.instance.signOut().then((value) {
                 Navigator.pushAndRemoveUntil(
                     (context),
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                     (route) => false);
               });
             },
@@ -95,8 +96,10 @@ class DrawerScreen extends StatelessWidget {
 
 class DrawerListTile extends StatelessWidget {
   final IconData iconData;
+  // ignore: prefer_typing_uninitialized_variables
   final iconColor;
   final String title;
+  // ignore: prefer_typing_uninitialized_variables
   final titleColor;
   final VoidCallback onTilePressed;
 

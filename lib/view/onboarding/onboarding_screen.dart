@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mononton_app/themes/themes.dart';
 import 'package:mononton_app/view/access/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mononton_app/themes/constant/theme_color.dart';
 
 import '../../models/onboarding_model.dart';
 
@@ -26,10 +25,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   _storeOnboardingInfo() async {
+    // ignore: avoid_print
     print('Shared pref called');
     int isviewed = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('onBoard', isviewed);
+    // ignore: avoid_print
     print(prefs.getInt('onBoard'));
   }
 
@@ -113,7 +114,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
             ),
           ),
-          Container(
+          SizedBox(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -162,6 +163,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names, avoid_types_as_parameter_names
   Container buildDot(int index, BuildContext) {
     return Container(
       height: 10,

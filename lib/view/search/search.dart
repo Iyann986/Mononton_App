@@ -16,8 +16,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   final seacrhController = TextEditingController();
 
   @override
@@ -38,9 +36,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Movie'),
+        title: const Text('Search Movie'),
         centerTitle: true,
-        backgroundColor: Color(0xffC1232F),
+        backgroundColor: const Color(0xffC1232F),
       ),
       body: Column(
         children: [
@@ -52,8 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: TextFormField(
                     controller: seacrhController,
                     decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.search),
-                      suffixIconColor: Color(0xffC1232F),
+                      suffixIcon: const Icon(Icons.search),
+                      suffixIconColor: const Color(0xffC1232F),
                       hintText: 'Search Movie ...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
@@ -119,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             width: 50,
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
-                                CircularProgressIndicator(),
+                                const CircularProgressIndicator(),
                           ),
                         ),
                       ),

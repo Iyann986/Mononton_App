@@ -12,7 +12,7 @@ class DroppedViewModel with ChangeNotifier {
   DroppedViewState _state = DroppedViewState.none;
   DroppedViewState get state => _state;
 
-  List<MovieDetail> _dropped = [];
+  final List<MovieDetail> _dropped = [];
   List<MovieDetail> get dropped => _dropped;
 
   changeState(DroppedViewState s) {

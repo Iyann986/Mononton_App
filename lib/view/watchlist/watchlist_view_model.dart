@@ -45,7 +45,7 @@ class WatchlistViewModel with ChangeNotifier {
   WatchlistViewState _state = WatchlistViewState.none;
   WatchlistViewState get state => _state;
 
-  List<MovieDetail> _watchlist = [];
+  final List<MovieDetail> _watchlist = [];
   List<MovieDetail> get watchlist => _watchlist;
 
   // bool _isLoading = false;

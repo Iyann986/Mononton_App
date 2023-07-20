@@ -1,7 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:mononton_app/models/users/users.dart';
 import 'package:mononton_app/view/drawer_screen.dart';
 
@@ -29,10 +26,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
+            const SizedBox(
               height: 100,
               width: 100,
               child: InkWell(
@@ -48,11 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.person_rounded,
                   color: Color(0xff717076),
                 ),
-                title: Text(
+                title: const Text(
                   'Username',
                   style: TextStyle(
                     color: Colors.grey,
@@ -60,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 subtitle: Text(
                   widget.user.name!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
@@ -69,11 +66,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.mail_rounded,
                   color: Color(0xff717076),
                 ),
-                title: Text(
+                title: const Text(
                   'Email',
                   style: TextStyle(
                     color: Colors.grey,
@@ -81,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 subtitle: Text(
                   widget.user.email!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
@@ -113,15 +110,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      const Color(0xffC1232F),
+                    ),
+                  ),
                   child: const Text(
                     'Edit Profile',
                     style: TextStyle(
                       color: Colors.white,
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                      Color(0xffC1232F),
                     ),
                   ),
                 ),
@@ -144,15 +141,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      const Color(0xffC1232F),
+                    ),
+                  ),
                   child: const Text(
                     'Change Password',
                     style: TextStyle(
                       color: Colors.white,
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                      Color(0xffC1232F),
                     ),
                   ),
                 ),

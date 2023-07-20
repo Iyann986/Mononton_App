@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:mononton_app/models/users/users.dart';
 
 import '../movie/movie_screen.dart';
@@ -55,29 +53,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 controller: passwordController,
                 keyboardType: TextInputType.name,
                 validator: (value) {
-                  RegExp regex = new RegExp(r'^.{6,}$');
+                  RegExp regex = RegExp(r'^.{6,}$');
                   if (value!.isEmpty) {
                     return ("Password is required for login");
                   }
                   if (!regex.hasMatch(value)) {
                     return ("Enter Valid Password(Min. 6 Character)");
                   }
+                  return null;
                 },
                 onSaved: (value) {
                   nameController.text = value!;
                 },
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                  prefixIcon: Icon(
+                  contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  prefixIcon: const Icon(
                     Icons.https_rounded,
                     color: Colors.black,
                   ),
                   hintText: "Enter Your Password",
                   labelText: "Password",
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: const TextStyle(color: Colors.black),
                   filled: true,
-                  fillColor: Color(0xffD7D9DD),
+                  fillColor: const Color(0xffD7D9DD),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -106,12 +105,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Icons.https_rounded,
                     color: Colors.black,
                   ),
-                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                   hintText: "Confirm Your Password",
                   labelText: "Confirm Password",
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: const TextStyle(color: Colors.black),
                   filled: true,
-                  fillColor: Color(0xffD7D9DD),
+                  fillColor: const Color(0xffD7D9DD),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -133,15 +132,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       .then((value) => Navigator.pushAndRemoveUntil(
                           (context),
                           MaterialPageRoute(
-                              builder: (context) => MovieScreen()),
+                              builder: (context) => const MovieScreen()),
                           (route) => false));
                 },
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(const Size(150, 40)),
                   shape: MaterialStateProperty.all(
@@ -151,6 +144,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   backgroundColor: MaterialStateProperty.all(
                     const Color(0xffC1232F),
+                  ),
+                ),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
                 ),
               ),

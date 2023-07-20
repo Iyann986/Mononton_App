@@ -51,11 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Email",
         labelText: "Email",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -68,24 +68,25 @@ class _LoginScreenState extends State<LoginScreen> {
       controller: passwordController,
       obscureText: true,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{6,}$');
+        RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
           return ("Password is required for login");
         }
         if (!regex.hasMatch(value)) {
           return ("Enter Valid Password(Min. 6 Character)");
         }
+        return null;
       },
       onSaved: (value) {
         passwordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Enter Your Password",
         labelText: "Password",
         filled: true,
-        fillColor: Color(0xffD7D9DD),
+        fillColor: const Color(0xffD7D9DD),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(36),
+            padding: const EdgeInsets.all(36),
             child: Form(
               key: _formKey,
               child: Column(
@@ -259,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Create an account? ",
                         style: GoogleFonts.poppins(
-                          color: Color(0xff646472),
+                          color: const Color(0xff646472),
                         ),
                       ),
                       GestureDetector(
@@ -286,7 +287,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           "Register",
                           style: GoogleFonts.poppins(
-                            color: Color(0xffC1232F),
+                            color: const Color(0xffC1232F),
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
@@ -312,7 +313,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Text(
             "Forgot Password?",
             style: GoogleFonts.poppins(
-              color: Color(0xffC1232F),
+              color: const Color(0xffC1232F),
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
@@ -345,8 +346,8 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => MovieScreen())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const MovieScreen())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
@@ -373,6 +374,7 @@ class _LoginScreenState extends State<LoginScreen> {
             errorMessage = "An undefined Error happened.";
         }
         Fluttertoast.showToast(msg: errorMessage!);
+        // ignore: avoid_print
         print(error.code);
       }
     }

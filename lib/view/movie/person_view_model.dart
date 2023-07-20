@@ -9,6 +9,7 @@ class PersonViewModel with ChangeNotifier {
   getTrendingPerson() async {
     final c = await AuthApi.getTrendingPerson();
     _persons = c;
+    // ignore: avoid_print
     print('person: ${_persons[3].profilePath}');
     notifyListeners();
   }

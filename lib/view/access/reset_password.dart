@@ -38,12 +38,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Column(
               children: <Widget>[
                 const SizedBox(
@@ -71,15 +71,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     },
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      prefixIcon: Icon(
+                      contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                      prefixIcon: const Icon(
                         Icons.mail,
                         color: Color(0xff717076),
                       ),
                       hintText: "Enter Your Email",
                       labelText: "Email",
                       filled: true,
-                      fillColor: Color(0xffFBFBFB),
+                      fillColor: const Color(0xffFBFBFB),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -91,19 +91,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   onPressed: () {
                     resetPassword();
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffC1232F),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
                   child: Text(
                     'Reset Password',
                     style: GoogleFonts.lexend(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffC1232F),
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
                 ),
@@ -120,8 +121,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailTextController.text.trim());
       const SnackBar(content: Text('Password Reset Email Sent'));
+      // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
+      // ignore: avoid_print
       print('error message : $e');
       SnackBar(content: Text(e.message!));
       Navigator.of(context).pop();

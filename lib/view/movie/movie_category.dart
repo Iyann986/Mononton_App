@@ -1,6 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mononton_app/models/users/users.dart';
 import 'package:mononton_app/view/movie/category_view_model.dart';
@@ -38,11 +36,11 @@ class _CategoryMovieState extends State<CategoryMovie> {
     final categoryProvider = Provider.of<CategoryViewModel>(context);
 
     return movieProvider.movies.isEmpty
-        ? CircularProgressIndicator()
+        ? const CircularProgressIndicator()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 45,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -62,15 +60,15 @@ class _CategoryMovieState extends State<CategoryMovie> {
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color(0xffC1232F),
+                                color: const Color(0xffC1232F),
                               ),
-                              borderRadius: BorderRadius.all(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(25),
                               ),
                               color: (categoryProvider.genres[index].id ==
                                       selectedGenre)
-                                  ? Color(0xffC1232F)
-                                  : Color(0xFFFFFFFF),
+                                  ? const Color(0xffC1232F)
+                                  : const Color(0xFFFFFFFF),
                             ),
                             child: Text(
                               categoryProvider.genres[index].name.toUpperCase(),
@@ -79,8 +77,8 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                 fontWeight: FontWeight.bold,
                                 color: (categoryProvider.genres[index].id ==
                                         selectedGenre)
-                                    ? Color(0xFFFFFFFF)
-                                    : Color(0xffC1232F),
+                                    ? const Color(0xFFFFFFFF)
+                                    : const Color(0xffC1232F),
                               ),
                             ),
                           ),
@@ -96,7 +94,7 @@ class _CategoryMovieState extends State<CategoryMovie> {
                   itemCount: categoryProvider.genres.length,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Text(
                   'New Playing'.toUpperCase(),
                   style: const TextStyle(
@@ -106,13 +104,14 @@ class _CategoryMovieState extends State<CategoryMovie> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Container(
+              const SizedBox(height: 10),
+              SizedBox(
                 height: 200,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     Movie movie = movieProvider.movies[index];
+                    // ignore: unnecessary_null_comparison
                     return movie == null
                         ? const CircularProgressIndicator()
                         : Column(
@@ -159,10 +158,11 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                         ),
                                       );
                                     },
-                                    placeholder: (context, url) => Container(
+                                    placeholder: (context, url) =>
+                                        const SizedBox(
                                       width: 100,
                                       height: 150,
-                                      child: const Center(
+                                      child: Center(
                                         child: CircularProgressIndicator(),
                                       ),
                                     ),
@@ -170,7 +170,7 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Container(
+                              SizedBox(
                                 width: 100,
                                 child: Text(
                                   movie.title!.toUpperCase(),
@@ -182,7 +182,7 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 child: Row(
                                   children: [
                                     const Icon(
@@ -205,7 +205,7 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                       color: Colors.yellow,
                                       size: 14,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: Colors.yellow,
                                       size: 14,
@@ -213,7 +213,7 @@ class _CategoryMovieState extends State<CategoryMovie> {
                                     Text(
                                       movie.voteAverage!.toString().toString(),
                                       // movie.voteAverage!.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black45,
                                       ),
                                     ),

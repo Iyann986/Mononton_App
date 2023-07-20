@@ -50,7 +50,7 @@ class _MovieScreenState extends State<MovieScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffC1232F),
+        backgroundColor: const Color(0xffC1232F),
         title: const Text('Movie Screen'),
         centerTitle: true,
         actions: [
@@ -67,6 +67,7 @@ class _MovieScreenState extends State<MovieScreen> {
           ),
         ],
       ),
+      // ignore: unnecessary_null_comparison
       drawer: loggedInUser == null
           ? const CircularProgressIndicator()
           : DrawerScreen(
@@ -114,6 +115,9 @@ class _MovieScreenState extends State<MovieScreen> {
                                 alignment: Alignment.bottomLeft,
                                 children: [
                                   ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
                                     child: CachedNetworkImage(
                                       imageUrl:
                                           'https://image.tmdb.org/t/p/original/${movie.backdropPath}',
@@ -122,9 +126,6 @@ class _MovieScreenState extends State<MovieScreen> {
                                               3,
                                       width: MediaQuery.of(context).size.width,
                                       fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
                                     ),
                                   ),
                                   Padding(
@@ -178,17 +179,17 @@ class _MovieScreenState extends State<MovieScreen> {
                                   color: Colors.black45,
                                 ),
                               ),
-                              SizedBox(height: 12),
+                              const SizedBox(height: 12),
                               Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 130,
                                     child: ListView.separated(
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         Person persons =
                                             personProvider.persons[index];
-                                        return Container(
+                                        return SizedBox(
                                           child: Column(
                                             children: [
                                               Card(
@@ -236,13 +237,13 @@ class _MovieScreenState extends State<MovieScreen> {
                                                             ),
                                                           ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 child: Center(
                                                   child: Text(persons.name!
                                                       .toUpperCase()),
                                                 ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 child: Center(
                                                   child: Text(persons
                                                       .knowForDepartment!
@@ -254,7 +255,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                         );
                                       },
                                       separatorBuilder: (context, index) =>
-                                          VerticalDivider(),
+                                          const VerticalDivider(),
                                       itemCount: personProvider.persons.length,
                                     ),
                                   ),

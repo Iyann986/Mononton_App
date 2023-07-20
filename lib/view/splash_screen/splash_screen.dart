@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mononton_app/themes/constant/theme_color.dart';
 import 'package:mononton_app/view/access/user_email.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Scaffold(
         body: Center(
           child: Column(

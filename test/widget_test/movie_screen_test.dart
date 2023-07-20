@@ -16,7 +16,7 @@ void main() {
           create: (_) => PersonViewModel(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         home: MovieScreen(),
       ),
     ));

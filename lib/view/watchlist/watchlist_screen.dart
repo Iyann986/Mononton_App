@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:mononton_app/view/watchlist/dropped_view_model.dart';
 import 'package:mononton_app/view/watchlist/finish_view_model.dart';
 import 'package:mononton_app/view/watchlist/watchlist_view_model.dart';
@@ -98,7 +96,9 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 
   Widget droppedBody(WatchlistViewModel watchlistViewModel,
       DroppedViewModel droppedViewModel) {
+    // ignore: unrelated_type_equality_checks
     final isLoading = watchlistViewModel.state == DroppedViewState.loading;
+    // ignore: unrelated_type_equality_checks
     final isError = watchlistViewModel.state == DroppedViewState.error;
 
     if (isLoading) {
@@ -157,7 +157,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.rectangle,
                           ),
                           child: watchlistViewModel
@@ -177,18 +177,18 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                          const CircularProgressIndicator(),
                                     ),
                                   ),
                                 ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 18,
                         width: 200,
                         child: Text(
                           watchlistViewModel.watchlist[index].title!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                           maxLines: 1,
@@ -200,7 +200,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 100,
                               width: 100,
                               child: Column(
@@ -228,6 +228,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                           .then((value) {
                                         user = Users.fromMap(value.data());
                                         setState(() {
+                                          // ignore: avoid_print
                                           print('users = ${user.movieDropped}');
                                           watchlistViewModel.watchlist.clear();
                                           droppedViewModel.dropped.clear();
@@ -238,16 +239,16 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                         });
                                       });
                                     },
-                                    child: Text(
-                                      'Drop',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all(
-                                        Color(0xffC1232F),
+                                        const Color(0xffC1232F),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Drop',
+                                      style: TextStyle(
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
@@ -274,6 +275,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                           .then((value) {
                                         user = Users.fromMap(value.data());
                                         setState(() {
+                                          // ignore: avoid_print
                                           print('users = ${user.movieFinish}');
                                           watchlistViewModel.watchlist.clear();
                                           finishViewModel.finish.clear();
@@ -284,16 +286,16 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                         });
                                       });
                                     },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        const Color(0xffC1232F),
+                                      ),
+                                    ),
                                     child: const Text(
                                       'Finish',
                                       style: TextStyle(
                                         color: Colors.white,
-                                      ),
-                                    ),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Color(0xffC1232F),
                                       ),
                                     ),
                                   ),
@@ -327,7 +329,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
               return Container(
                 height: 120,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Center(
@@ -339,7 +341,8 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          decoration: BoxDecoration(shape: BoxShape.rectangle),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.rectangle),
                           child: droppedViewModel.dropped[index].backdropPath ==
                                   null
                               ? const Image(
@@ -356,18 +359,18 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                          const CircularProgressIndicator(),
                                     ),
                                   ),
                                 ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 18,
                         width: 200,
                         child: Text(
                           droppedViewModel.dropped[index].title!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                           maxLines: 1,
@@ -396,6 +399,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                   .then((value) {
                                 user = Users.fromMap(value.data());
                                 setState(() {
+                                  // ignore: avoid_print
                                   print('users = ${user.movieDropped}');
                                   watchlistViewModel.watchlist.clear();
                                   droppedViewModel.dropped.clear();
@@ -406,17 +410,17 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                 });
                               });
                             },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                const Color(0xffC1232F),
+                              ),
+                            ),
                             child: const Text(
                               'Watch Again',
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                Color(0xffC1232F),
-                              ),
                             ),
                           ),
                         ),
@@ -444,7 +448,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
               return Container(
                 height: 120,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Center(
@@ -456,7 +460,8 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          decoration: BoxDecoration(shape: BoxShape.rectangle),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.rectangle),
                           child: finishViewModel.finish[index].backdropPath ==
                                   null
                               ? const Image(
@@ -473,18 +478,18 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                       width: double.infinity,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                          const CircularProgressIndicator(),
                                     ),
                                   ),
                                 ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 18,
                         width: 250,
                         child: Text(
                           finishViewModel.finish[index].title!,
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
