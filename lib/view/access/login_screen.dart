@@ -224,14 +224,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        // child: IconButton(
-                        //   icon: Icon(
-                        //     FontAwesomeIcons.facebook,
-                        //     size: 30,
-                        //     color: Colors.blue,
-                        //   ),
-                        //   onPressed: () {},
-                        // ),
                       ),
                       Container(
                         height: 60,
